@@ -47,10 +47,36 @@ After about 30-60 minutes the version of the application will be increased, indi
 
 LINK = https://chrome.google.com/webstore/detail/bigbluebutton-screenshare/<KEY>
 
-You should have a link to your extension now and a key.
-You can populate the `kurento` section of the settings for screensharing with
+Now you should have a link to your extension and a key. Next you need to configure your server to use those for screensharing.
+
+## To configure your HTML5 client (installed as a package):
+
+If you installed the client as a package `bbb-html5`, edit `/usr/share/meteor/bundle/programs/server/assets/app/config/settings-production.json`
+Alternatively, if you are running a the client in development environment, edit `~/dev/bigbluebutton/bigbluebutton-html5/private/config/settings-development.json`
+
+Populate the `kurento` section of the settings for screensharing with
 
 ```
-"chromeExtensionKey": "KEY",
-"chromeExtensionLink": "LINK"
+"chromeExtensionKey": "YOUR_KEY",
+"chromeExtensionLink": "YOUR_LINK"
 ```
+Save the file and restart the client `sudo systemctl restart bbb-html5` in the case of packaged client.
+
+## To configure your Flash client:
+
+Populate the key and link into `/var/www/bigbluebutton/client/conf/config.xml`
+
+```
+<module name="ScreenshareModule"
+                        (...)
+                        offerWebRTC="true"
+                        chromeExtensionLink="YOUR_LINK"
+                        chromeExtensionKey="YOUR_KEY"
+                        (...)
+                />
+```
+
+Make sure the property `offerWebRTC` is set to true as above. Save the file and restart BigBlueButton via `sudo bbb-conf --restart`
+
+You should be able to share your screen from a BigBlueButton meeting now using Google Chrome.
+
