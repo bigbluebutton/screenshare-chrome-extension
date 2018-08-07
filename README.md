@@ -54,3 +54,7 @@ You can populate the `kurento` section of the settings for screensharing with
 "chromeExtensionKey": "KEY",
 "chromeExtensionLink": "LINK"
 ```
+
+Link:
+https://chrome.google.com/webstore/detail/bigbluebutton-screenshare/akgoaoikmbmhcopjgakkcepdgdgkjfbc
+
